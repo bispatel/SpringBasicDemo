@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- Constructor Injection -->
+	<bean id="typeOnly" class="org.bishwa.spring.beanFactory.Triangle">
+		<constructor-arg type="java.lang.String" value="Isoceles" />
+	</bean>
+
+	<!-- Constructor Injection -->
+	<bean id="typeAndHeight" class="org.bishwa.spring.beanFactory.Triangle">
+		<constructor-arg value="Right" />
+		<constructor-arg value="30" />
+	</bean>
+
+	<!-- Constructor Injection -->
+	<bean id="heightOnly" class="org.bishwa.spring.beanFactory.Triangle">
+		<constructor-arg value="30" type="int" />
+	</bean>
+	<!-- Setter Injection -->
+	<bean id="setterInject" class="org.bishwa.spring.beanFactory.Triangle">
+		<property name="type" value="Equlateral" />
+	</bean>
+
+
+	<bean id="zeroPoint" class="org.bishwa.spring.beanFactory.Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+
+	<bean id="point3" class="org.bishwa.spring.beanFactory.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+
+
+	<bean id="triangle" class="org.bishwa.spring.beanFactory.Triangle">
+		<property name="pointA" ref="zeroPoint" />
+		<property name="pointB">
+			<bean class="org.bishwa.spring.beanFactory.Point">
+				<property name="x" value="-20" />
+				<property name="y" value="0" />
+			</bean>
+		</property>
+		<property name="pointC" ref="point3" />
+	</bean>
+
+	<bean id="collection" class="org.bishwa.spring.beanFactory.Triangle">
+		<property name="list">
+			<list>
+				<ref bean="zeroPoint" />
+				<ref bean="point3" />
+			</list>
+		</property>
+	</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</beans>

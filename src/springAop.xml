@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	                      
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                        http://www.springframework.org/schema/context
+	                    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	                    http://www.springframework.org/schema/aop
+	                    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="org.bishwa.spring.aop"/>
+    <aop:aspectj-autoproxy/>  
+    <bean name="triangle" class="org.bishwa.spring.aop.Triangle">
+       <property name="name" value="Triangle Name"/>
+    </bean>
+    
+    <bean name="circle" class="org.bishwa.spring.aop.Circle">
+      <!--  <property name="name" value="Circle Name"/> -->
+    </bean>
+    
+    <bean name="shapeService" class="org.bishwa.spring.aop.ShapeService" autowire="byName">
+    </bean>
+   
+    
+</beans>

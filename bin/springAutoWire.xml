@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	                      
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                        http://www.springframework.org/schema/context
+	                    http://www.springframework.org/schema/context/spring-context-4.0.xsd" 
+    xmlns:context="http://www.springframework.org/schema/context"                    
+	default-init-method="myInit" default-destroy-method="destroy">
+
+    <context:annotation-config/>
+	<bean id="pointA" class="org.bishwa.spring.autowire.Point">
+	    <qualifier value="circleRelated"/>
+		<property name="x" value="${pointA.pointX}" />
+		<property name="y" value="${pointA.pointY}" />
+	</bean>
+	<bean id="pointB" class="org.bishwa.spring.autowire.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+	<bean id="pointC" class="org.bishwa.spring.autowire.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+	<bean id="autowireT" class="org.bishwa.spring.autowire.Triangle"
+		autowire="byName">
+	</bean>
+	<bean id="coordinate" class="org.bishwa.spring.autowire.Coordinate">
+		<property name="a" value="20" />
+		<property name="b" value="20" />
+		<property name="c" value="20" />
+		<property name="d" value="20" />
+	</bean>
+	<bean id="autowireType" class="org.bishwa.spring.autowire.Rectangle"
+		init-method="myInit" destroy-method="destroy" autowire="byType">
+	</bean>
+	<bean id="pointCircle" class="org.bishwa.spring.annotation.Point">
+		<property name="x" value="${pointA.pointX}" />
+		<property name="y" value="${pointA.pointY}" />
+	</bean>
+	<bean id="circle" class="org.bishwa.spring.annotation.Circle">
+	     <property name="center" ref="pointCircle"></property> 
+	</bean>
+	<!-- <bean class="org.bishwa.spring.autowire.DisplayNameBeanPostProcessor"/> -->
+<!-- <bean class="org.bishwa.spring.autowire.DisplayBeanFactoryPostProcessor" 
+	/> -->
+	<!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/> -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="points.properties"/>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basenames">
+	        <list>
+	        <value>mymessages</value>
+	        </list>
+	    </property>
+	        
+	    
+	</bean>
+</beans>
